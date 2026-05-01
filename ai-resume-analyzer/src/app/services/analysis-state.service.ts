@@ -11,7 +11,7 @@ export class AnalysisStateService {
   analysis = signal<any>(null);
   hasActiveFlow = signal(false);
 
-  private readonly baseUrl = 'http://localhost:3200';
+  private readonly baseUrl = 'https://atsify.onrender.com';
 
   resetToHome() {
     this.mode.set(null);
