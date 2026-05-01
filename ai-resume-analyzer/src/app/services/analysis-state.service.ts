@@ -38,9 +38,16 @@ export class AnalysisStateService {
     try {
       const res = await axios.post(`${this.baseUrl}/analyze`, { file: base64File }, { timeout: 45000 });
       this.analysis.set(res.data);
-    } catch (error) {
+    } catch (error: any) {
       console.error('ATS analysis failed:', error);
-      this.errorMessage.set('Could not analyze the resume right now. Please retry.');
+
+      const message =
+        error?.response?.data?.error ||
+        error?.response?.data?.message ||
+        error?.message ||
+        'Something went wrong. Please try again.';
+
+      this.errorMessage.set(message);
     } finally {
       this.loading.set(false);
     }
@@ -60,9 +67,16 @@ export class AnalysisStateService {
         { timeout: 60000 }
       );
       this.analysis.set(res.data);
-    } catch (error) {
-      console.error('JD analysis failed:', error);
-      this.errorMessage.set('Could not compare resume with job description right now. Please retry.');
+    } catch (error: any) {
+      console.error('ATS analysis failed:', error);
+
+      const message =
+        error?.response?.data?.error ||
+        error?.response?.data?.message ||
+        error?.message ||
+        'Something went wrong. Please try again.';
+
+      this.errorMessage.set(message);
     } finally {
       this.loading.set(false);
     }
