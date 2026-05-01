@@ -3,6 +3,8 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
+const rateLimit = require('express-rate-limit');
+const { ipKeyGenerator } = require('express-rate-limit');
 
 const app = express();
 const PORT = process.env.PORT || 3200;
@@ -14,6 +16,28 @@ const APP_TITLE = process.env.APP_TITLE || 'AI Resume Analyzer';
 app.use(cors());
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ limit: '10mb', extended: true }));
+app.set('trust proxy', 1);
+
+// 🔥 RATE LIMITER (HYBRID: clientId + IP)
+const analyzeLimiter = rateLimit({
+  windowMs: 2 * 60 * 60 * 1000,
+  max: 2,
+  keyGenerator: (req) => {
+    const clientId = req.body?.clientId || 'anon';
+
+    // ✅ SAFE IP handling
+    const ip = ipKeyGenerator(req);
+
+    return `${ip}-${clientId}`;
+  },
+  message: {
+    error: 'Too many requests. Please try again after 2 hours.'
+  },
+  standardHeaders: true,
+  legacyHeaders: false
+});
+
+// ---------------- PDF LOGIC ----------------
 
 let pdfjsLibPromise;
 function getPdfJs() {
@@ -41,10 +65,10 @@ async function extractTextFromPDF(buffer) {
   return fullText;
 }
 
+// ---------------- UTIL FUNCTIONS ----------------
+
 function extractJsonObject(text) {
-  if (!text || typeof text !== 'string') {
-    return null;
-  }
+  if (!text || typeof text !== 'string') return null;
 
   const cleaned = text.replace(/```json/gi, '').replace(/```/g, '').trim();
 
@@ -67,13 +91,9 @@ function extractJsonObject(text) {
 }
 
 function normalizeModelContent(message) {
-  if (!message) {
-    return '';
-  }
+  if (!message) return '';
 
-  if (typeof message.content === 'string') {
-    return message.content;
-  }
+  if (typeof message.content === 'string') return message.content;
 
   if (Array.isArray(message.content)) {
     return message.content
@@ -137,18 +157,20 @@ async function callOpenRouter(prompt, maxTokens = 400) {
   );
 }
 
+// ---------------- ROUTES ----------------
+
 app.get('/health', (_, res) => {
   res.json({ ok: true, service: 'backend', port: Number(PORT) });
 });
 
-app.post('/analyze', async (req, res) => {
+// APPLY RATE LIMIT HERE
+app.post('/analyze', analyzeLimiter, async (req, res) => {
   try {
     if (!process.env.OPENROUTER_API_KEY) {
-      return res.status(500).json({ error: 'Missing OPENROUTER_API_KEY in backend/.env' });
+      return res.status(500).json({ error: 'Missing OPENROUTER_API_KEY' });
     }
 
     const { file } = req.body;
-
     if (!file) {
       return res.status(400).json({ error: 'File is required' });
     }
@@ -246,6 +268,7 @@ ${text}
     }
 
     return res.json(normalizeAnalysisShape(parsed));
+
   } catch (err) {
     console.error('FULL ERROR:', err.response?.data || err.message);
     return res.status(500).json({
@@ -254,11 +277,11 @@ ${text}
   }
 });
 
-app.post('/analyze-jd', async (req, res) => {
+app.post('/analyze-jd', analyzeLimiter, async (req, res) => {
   try {
     if (!process.env.OPENROUTER_API_KEY) {
       return res.status(500).json({ error: 'Missing OPENROUTER_API_KEY in backend/.env' });
-    }
+  }
 
     const { file, jobDescription } = req.body;
 
