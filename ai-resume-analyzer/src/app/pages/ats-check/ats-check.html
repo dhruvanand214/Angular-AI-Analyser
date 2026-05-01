@@ -1,0 +1,13 @@
+<section class="input-shell">
+  <h2>ATS Score Check</h2>
+  <p>Upload your resume and run a focused ATS quality check.</p>
+
+  <app-upload-panel (fileSelected)="onFileSelected($event)"></app-upload-panel>
+
+  @if (localError()) {
+  <div class="error-box">{{ localError() }}</div>
+  }
+
+  <button type="button" class="run-btn" (click)="analyze()">Analyze Resume</button>
+</section>
+

@@ -1,0 +1,135 @@
+.home-shell {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 4.4rem 1.25rem 2rem;
+}
+
+.kicker {
+  color: var(--accent-b);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.hero-title {
+  margin-top: 0.5rem;
+  font-size: clamp(2.35rem, 4vw, 4.2rem);
+  line-height: 1.05;
+  font-weight: 800;
+}
+
+.hero-copy {
+  margin-top: 0.75rem;
+  color: var(--muted);
+  max-width: 45rem;
+  font-size: 1.02rem;
+}
+
+.mode-grid {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.mode-tile {
+  position: relative;
+  overflow: hidden;
+  text-align: left;
+  min-height: 210px;
+  padding: 1.45rem;
+  border-radius: 22px;
+  border: none;
+  color: var(--ink);
+  background: var(--surface);
+  box-shadow: var(--raise);
+  transition: transform 0.2s ease;
+}
+
+.mode-tile::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 9px;
+  background: linear-gradient(180deg, var(--accent-d), var(--accent-a), var(--accent-b));
+}
+
+.mode-tile::after {
+  content: '';
+  position: absolute;
+  right: -44px;
+  bottom: -44px;
+  width: 140px;
+  height: 140px;
+  border-radius: 40px;
+  background: linear-gradient(135deg, rgba(113, 169, 255, 0.42), rgba(140, 116, 255, 0.22));
+  transform: rotate(14deg);
+}
+
+.mode-tile:hover {
+  transform: translateY(-4px);
+}
+
+.tile-top {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mode-tile h3 {
+  position: relative;
+  z-index: 1;
+  margin: 1.6rem 0 0.55rem;
+  font-size: 1.42rem;
+  font-weight: 700;
+}
+
+.mode-tile p {
+  position: relative;
+  z-index: 1;
+  color: var(--muted);
+  max-width: 34rem;
+}
+
+.mode-tile.alt {
+  background: var(--surface-2);
+  box-shadow: var(--raise);
+}
+
+.mode-tile.alt::before {
+  background: linear-gradient(180deg, var(--accent-c), var(--accent-e), var(--accent-a));
+}
+
+.mode-tile.alt::after {
+  background: linear-gradient(135deg, rgba(255, 154, 194, 0.44), rgba(255, 178, 74, 0.24));
+}
+
+.tile-badge,
+.tile-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 0 0.85rem;
+  border-radius: 13px;
+  color: var(--ink);
+  background: var(--surface);
+  box-shadow: var(--inset);
+  font-weight: 700;
+  font-size: 0.82rem;
+}
+
+.tile-arrow {
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--accent-a), var(--accent-b));
+  box-shadow: 6px 6px 14px #c2cfdd, -6px -6px 14px #f8fdff;
+}
+
+@media (max-width: 900px) {
+  .mode-grid {
+    grid-template-columns: 1fr;
+  }
+}

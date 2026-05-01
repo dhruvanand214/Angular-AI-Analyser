@@ -1,0 +1,24 @@
+<section class="input-shell">
+  <h2>ATS + Job Description Match</h2>
+  <p>Upload your resume and paste a JD to get actionable matching insights.</p>
+
+  <app-upload-panel (fileSelected)="onFileSelected($event)"></app-upload-panel>
+
+  <div class="jd-block">
+    <label for="jdInput">Job Description</label>
+    <textarea
+      id="jdInput"
+      class="jd-input"
+      placeholder="Paste the job description here..."
+      [value]="jobDescription()"
+      (input)="onJdInput($event)"
+    ></textarea>
+  </div>
+
+  @if (localError()) {
+  <div class="error-box">{{ localError() }}</div>
+  }
+
+  <button type="button" class="run-btn" (click)="analyze()">Analyze Resume vs JD</button>
+</section>
+

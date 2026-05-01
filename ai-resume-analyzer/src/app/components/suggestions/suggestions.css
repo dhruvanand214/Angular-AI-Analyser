@@ -1,0 +1,50 @@
+.sugg-shell {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface);
+  border: none;
+  border-radius: 18px;
+  padding: 1.15rem;
+  box-shadow: var(--raise);
+}
+
+.sugg-shell::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 6px;
+  background: linear-gradient(180deg, var(--accent-d), var(--accent-a));
+}
+
+.sugg-shell h3 {
+  font-size: 1.08rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.rows {
+  display: grid;
+  gap: 0.68rem;
+}
+
+.row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+  color: #5f778b;
+  font-size: 0.92rem;
+}
+
+.mark {
+  width: 1.05rem;
+  display: inline-block;
+  font-weight: 700;
+}
+
+.mark.good {
+  color: #2b9a73;
+}
+
+.mark.warn {
+  color: #c29522;
+}

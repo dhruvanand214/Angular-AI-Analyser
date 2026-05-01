@@ -1,0 +1,41 @@
+<div class="flex items-center gap-6">
+
+  <!-- Circle -->
+  <div class="relative w-24 h-24">
+    <svg class="w-full h-full transform -rotate-90">
+      <circle
+        cx="50%"
+        cy="50%"
+        r="40"
+        stroke="#d1deea"
+        stroke-width="8"
+        fill="transparent"
+      />
+
+      <circle
+        cx="50%"
+        cy="50%"
+        r="40"
+        stroke="url(#grad)"
+        stroke-width="8"
+        fill="transparent"
+        stroke-linecap="round"
+        [attr.stroke-dasharray]="circumference"
+        [attr.stroke-dashoffset]="dashOffset"
+      />
+
+      <defs>
+        <linearGradient id="grad">
+          <stop offset="0%" stop-color="#71a9ff"/>
+          <stop offset="55%" stop-color="#8c74ff"/>
+          <stop offset="100%" stop-color="#ff9ac2"/>
+        </linearGradient>
+      </defs>
+    </svg>
+
+    <div class="absolute inset-0 flex items-center justify-center text-xl font-bold">
+      {{ score }}%
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,79 @@
+.input-shell {
+  position: relative;
+  overflow: hidden;
+  max-width: 940px;
+  margin: 2.4rem auto;
+  padding: 1.65rem;
+  background: var(--surface);
+  border-radius: 24px;
+  box-shadow: var(--raise);
+}
+
+.input-shell::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 8px;
+  background: linear-gradient(90deg, var(--accent-c), var(--accent-e), var(--accent-a));
+}
+
+.input-shell h2 {
+  font-size: 1.9rem;
+  font-weight: 800;
+}
+
+.input-shell p {
+  color: var(--muted);
+  margin-top: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.jd-block {
+  margin-top: 1.15rem;
+}
+
+.jd-block label {
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.jd-input {
+  width: 100%;
+  margin-top: 0.45rem;
+  min-height: 180px;
+  resize: vertical;
+  border: none;
+  border-radius: 18px;
+  padding: 1rem;
+  color: var(--ink);
+  background: var(--surface-2);
+  box-shadow: var(--inset);
+  outline: none;
+}
+
+.run-btn {
+  margin-top: 1rem;
+  width: 100%;
+  padding: 0.92rem;
+  border-radius: 16px;
+  border: none;
+  font-weight: 700;
+  color: #ffffff;
+  background: linear-gradient(90deg, #f59e0b, var(--accent-a));
+  box-shadow: var(--raise);
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.run-btn:hover {
+  filter: saturate(1.12);
+  transform: translateY(-1px);
+}
+
+.error-box {
+  margin-top: 0.9rem;
+  border-radius: 10px;
+  background: #ffe4ea;
+  border: 1px solid #ffc1cd;
+  padding: 0.75rem;
+  color: #9a3a4f;
+}

@@ -1,0 +1,24 @@
+<div class="upload-shell">
+  <h2>Resume File</h2>
+  <p class="sub">Upload once. Analyze in either flow.</p>
+
+  <div
+    (dragover)="onDragOver($event)"
+    (dragleave)="onDragLeave()"
+    (drop)="onDrop($event)"
+    class="dropzone"
+    [ngClass]="isDragging ? 'dropzone drag' : 'dropzone'"
+  >
+    <div class="glyph">AI</div>
+    <p>Drag and drop your resume</p>
+    <small>PDF, DOC, DOCX</small>
+  </div>
+
+  <input type="file" accept=".pdf,.doc,.docx" (change)="onFileChange($event)" class="hidden" #fileInput />
+
+  <button type="button" (click)="fileInput.click()" class="secondary-btn">Upload from device</button>
+
+  @if (selectedFile) {
+  <p class="file-name">{{ selectedFile.name }}</p>
+  }
+</div>

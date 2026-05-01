@@ -1,0 +1,58 @@
+<section class="results-shell">
+  @if (!state.hasActiveFlow()) {
+  <div class="empty-box">
+    <h2>No analysis started yet</h2>
+    <p>Choose a workflow from home and submit your inputs to view results.</p>
+  </div>
+  } @else {
+    @if (state.loading()) {
+    <div class="skeleton-wrap">
+      <div class="sline w-70"></div>
+      <div class="sline w-40"></div>
+      <div class="sblock"></div>
+      <div class="sgrid">
+        <div class="smini"></div>
+        <div class="smini"></div>
+      </div>
+    </div>
+    } @else if (state.errorMessage()) {
+    <div class="error-box">
+      <h3>Analysis failed</h3>
+      <p>{{ state.errorMessage() }}</p>
+      <button type="button" (click)="retry()">Retry</button>
+    </div>
+    } @else if (state.analysis()) {
+      @if (state.mode() === 'ats') {
+      <app-analysis-dashboard [analysis]="state.analysis()" [loading]="false"></app-analysis-dashboard>
+      } @else if (state.mode() === 'jd') {
+      <div class="jd-results">
+        <div class="match-hero">
+          <p>Job Match Score</p>
+          <h2 class="mt-3">{{ state.analysis()?.jobMatchScore ?? state.analysis()?.score ?? 0 }}%</h2>
+        </div>
+        <div class="split-grid">
+          <div class="info-block">
+            <h3>Missing Keywords</h3>
+            <div class="chip-wrap">
+              @for (keyword of state.analysis()?.missingKeywords || []; track $index) {
+              <span class="chip">{{ keyword }}</span>
+              }
+            </div>
+          </div>
+          <div class="info-block">
+            <h3>Improvement Pointers</h3>
+            @for (tip of state.analysis()?.improvementPointers || []; track $index) {
+            <p class="tip">- {{ tip }}</p>
+            }
+          </div>
+        </div>
+        <div class="split-grid">
+          <app-suggestions [title]="'Strengths'" [items]="state.analysis()?.strengths || []"></app-suggestions>
+          <app-suggestions [title]="'Weaknesses'" [items]="state.analysis()?.weaknesses || []"></app-suggestions>
+        </div>
+      </div>
+      }
+    }
+  }
+</section>
+

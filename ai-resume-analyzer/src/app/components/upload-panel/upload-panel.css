@@ -1,0 +1,82 @@
+.upload-shell {
+  background: var(--surface);
+  border: none;
+  border-radius: 20px;
+  padding: 1.25rem;
+  box-shadow: var(--inset);
+}
+
+.upload-shell h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.sub {
+  color: var(--muted);
+  font-size: 0.88rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0.8rem;
+}
+
+.dropzone {
+  border: none;
+  background: var(--surface-2);
+  min-height: 185px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 1.1rem;
+  box-shadow: var(--inset);
+  border-radius: 18px;
+  transition: outline 0.2s ease, transform 0.2s ease;
+}
+
+.dropzone.drag {
+  outline: 2px solid #b2c7da;
+}
+
+.glyph {
+  width: 2.8rem;
+  height: 2.8rem;
+  display: grid;
+  place-items: center;
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--accent-a), var(--accent-b));
+  font-weight: 800;
+  border-radius: 13px;
+  box-shadow: 0 12px 24px rgba(113, 169, 255, 0.34);
+}
+
+.dropzone p {
+  font-weight: 600;
+  margin-top: 0.45rem;
+}
+
+.dropzone small {
+  color: var(--muted);
+}
+
+.secondary-btn {
+  width: 100%;
+  margin-top: 0.7rem;
+  padding: 0.78rem;
+  border: none;
+  color: var(--ink);
+  background: var(--surface);
+  box-shadow: var(--raise);
+  border-radius: 14px;
+  font-weight: 700;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.secondary-btn:hover {
+  color: var(--accent-b);
+  transform: translateY(-1px);
+}
+
+.file-name {
+  margin-top: 0.75rem;
+  color: #158c67;
+  font-size: 0.9rem;
+  font-weight: 700;
+}

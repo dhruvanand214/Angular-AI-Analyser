@@ -1,0 +1,11 @@
+<div class="sugg-shell">
+  <h3>{{ title }}</h3>
+  <div class="rows">
+    @for (item of items; track $index) {
+    <div class="row">
+      <span [class]="title === 'Weaknesses' ? 'mark warn' : 'mark good'">{{ title === 'Weaknesses' ? '!' : '+' }}</span>
+      <span>{{ item }}</span>
+    </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,69 @@
+@if (loading) {
+    <div class="load-wrap">
+  <div class="load-text">
+    Analyzing your resume...
+  </div>
+</div>
+}
+
+@else if (!loading && analysis) {
+<div class="dash-wrap">
+
+    <!-- 🔥 SCORE HERO SECTION -->
+    <div class="score-hero">
+
+        <div class="hero-left">
+
+            <app-score-card [score]="analysis?.score"></app-score-card>
+
+            <div>
+                <h2 class="hero-title">ATS Score</h2>
+                <p class="hero-sub">Your resume effectiveness</p>
+            </div>
+
+        </div>
+
+        <div class="hero-right">
+
+            <span class="chip-good">
+                Good
+            </span>
+
+            <!-- progress bar -->
+            <div class="score-rail">
+                <div class="score-fill"
+                    [style.width.%]="analysis?.score"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- 📊 STATS CARDS -->
+    <div class="stats-grid">
+
+        <div class="stat-box">
+            <p class="stat-label">Keywords Matched</p>
+            <h3 class="stat-value">{{ analysis?.keywordsMatched ?? 0 }}</h3>
+        </div>
+
+        <div class="stat-box">
+            <p class="stat-label">Missing Keywords</p>
+            <h3 class="stat-value warn">{{ analysis?.missingKeywords ?? 0 }}</h3>
+        </div>
+
+        <div class="stat-box">
+            <p class="stat-label">Content Quality</p>
+            <h3 class="stat-value good">{{ analysis?.contentQuality ?? 0 }}%</h3>
+        </div>
+
+    </div>
+
+    <!-- 💡 SUGGESTIONS SECTION -->
+    <div class="suggest-grid">
+        <app-suggestions [title]="'Strengths'" [items]="analysis?.strengths || []"></app-suggestions>
+        <app-suggestions [title]="'Weaknesses'" [items]="analysis?.weaknesses || []"></app-suggestions>
+    </div>
+
+</div>
+}

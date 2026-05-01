@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap');
+@import 'tailwindcss';
+
+:root {
+  --bg: #e6edf5;
+  --surface: #e9f0f7;
+  --surface-2: #dee8f2;
+  --ink: #36546a;
+  --muted: #7f97ab;
+  --line: #d6e0ea;
+  --accent-a: #71a9ff;
+  --accent-b: #8c74ff;
+  --accent-c: #ff9ac2;
+  --accent-d: #18c6a7;
+  --accent-e: #ffb24a;
+  --raise: 10px 10px 20px #c8d4e0, -10px -10px 20px #f4fcff;
+  --inset: inset 8px 8px 16px #cad6e2, inset -8px -8px 16px #f6feff;
+}
+
+html, body {
+  min-height: 100%;
+  background:
+    linear-gradient(135deg, rgba(113, 169, 255, 0.22) 0 18%, transparent 18% 100%),
+    linear-gradient(165deg, transparent 0 64%, rgba(255, 154, 194, 0.18) 64% 100%),
+    linear-gradient(90deg, rgba(24, 198, 167, 0.10), transparent 38%, rgba(140, 116, 255, 0.10)),
+    var(--bg);
+  color: var(--ink);
+  font-family: 'Sora', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+button,
+a {
+  cursor: pointer;
+}
+
+::selection {
+  color: #ffffff;
+  background: var(--accent-b);
+}
