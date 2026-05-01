@@ -1,0 +1,11 @@
+{
+  "installCommand": "cd ai-resume-analyzer && npm install",
+  "buildCommand": "cd ai-resume-analyzer && npm run build",
+  "outputDirectory": "ai-resume-analyzer/dist/ai-resume-analyzer/browser",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
